@@ -1,0 +1,120 @@
+<!-- ANGIE XIMENA OLVERA ALVAREZ -->
+<!-- ACTIVIDAD 11 GALERÍA DE IMÁGENES CON UN MODAL -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes con Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Contenedor de la galería de imágenes */
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Estilo para las imágenes en miniatura */
+        .galeria img {
+            width: 150px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* Efecto hover para aumentar el tamaño de las imágenes en miniatura */
+        .galeria img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilos para el modal de la ventanita */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo para el contenido del modal (la imagen ampliada) */
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* Estilo para la imagen dentro del modal */
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Estilo para el botón de cierre del modal */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Galería de Imágenes</h1>
+
+    <!-- Contenedor de la galería -->
+    <div class="galeria">
+        <!-- Imágenes en miniatura -->
+        <img src="imagen1.jpg" alt="Imagen 1" onclick="abrirModal(this)">
+        <img src="imagen2.jpg" alt="Imagen 2" onclick="abrirModal(this)">
+        <img src="imagen3.jpg" alt="Imagen 3" onclick="abrirModal(this)">
+    </div>
+
+    <!-- Modal para mostrar la imagen ampliada -->
+    <div id="miModal" class="modal">
+        <!-- Botón de cierre del modal -->
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <!-- Imagen ampliada dentro del modal -->
+        <div class="modal-content">
+            <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
+        </div>
+    </div>
+
+    <script>
+        // Función para abrir el modal con la imagen seleccionada
+        function abrirModal(imagen) {
+            var modal = document.getElementById("miModal"); // Referencia al modal
+            var modalImg = document.getElementById("imagenAmpliada"); // Imagen dentro del modal
+
+            modalImg.src = imagen.src; // Cambia la imagen del modal
+            modal.style.display = "flex"; // Muestra el modal
+
+            // Agrega un evento de teclado para cerrar el modal al presionar Escape
+            document.addEventListener('keydown', function(evento) {
+                if (evento.key === "Escape") { // Si la tecla presionada es "Escape"
+                    cerrarModal(); // Cierra el modal
+                }
+            });
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+            var modal = document.getElementById("miModal"); // Referencia al modal
+            modal.style.display = "none"; // Oculta el modal
+        }
+    </script>
+
+</body>
+</html>
